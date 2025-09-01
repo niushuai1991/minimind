@@ -92,7 +92,9 @@ def train_epoch(epoch, wandb):
             state_dict = {k: v.half() for k, v in state_dict.items()}  # 半精度保存
             torch.save(state_dict, ckp)
             model.train()
-
+    end_time = time.time()
+    # 总耗时 时分秒
+    Logger(f'总耗时：{int(end_time - start_time) // 60}min:{int(end_time - start_time) % 60}s')
 
 def init_model(lm_config):
     tokenizer = AutoTokenizer.from_pretrained('../model/')
