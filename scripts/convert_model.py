@@ -1,3 +1,4 @@
+import argparse
 import os
 import sys
 
@@ -62,7 +63,13 @@ def convert_transformers2torch(transformers_path, torch_path):
 
 
 if __name__ == '__main__':
-    lm_config = MiniMindConfig(hidden_size=768, num_hidden_layers=16, max_seq_len=8192, use_moe=False)
+    parser = argparse.ArgumentParser(description="Converting PyTorch models to transformers models")
+    parser.add_argument('--hidden_size', default=768, type=int)
+    parser.add_argument('--num_hidden_layers', default=16, type=int)
+    parser.add_argument('--max_seq_len', default=8192, type=int)
+    args = parser.parse_args()
+    lm_config = MiniMindConfig(hidden_size=args.hidden_size, num_hidden_layers=args.num_hidden_layers, max_seq_len=args.max_seq_len,
+                               use_moe=False)
 
     torch_path = f"../out/full_sft_{lm_config.hidden_size}{'_moe' if lm_config.use_moe else ''}.pth"
 
