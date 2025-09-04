@@ -38,3 +38,31 @@ dependencies = [
     "uvicorn>=0.35.0",
     "wandb==0.18.3",
 ]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'linux'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'win32'" }
+]
+torchvision = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'linux'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'win32'" }
+]
+torchaudio = [
+  { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'linux'" },
+  { index = "pytorch-cu121", marker = "sys_platform == 'win32'" }
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu121"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
